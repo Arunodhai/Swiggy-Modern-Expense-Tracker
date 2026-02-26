@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Swiggy Tracker</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Swiggy Tracker</h1>
+      <p id="summary">Loading your stats...</p>
+      <div class="actions">
+        <button id="syncBtn">Sync current Swiggy page</button>
+        <button id="dashboardBtn" class="secondary">Open dashboard</button>
+      </div>
+      <p id="status" aria-live="polite"></p>
+    </main>
+    <script src="popup.js" type="module"></script>
+  </body>
+</html>

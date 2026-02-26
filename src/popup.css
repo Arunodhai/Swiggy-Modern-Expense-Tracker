@@ -1,0 +1,64 @@
+:root {
+  --bg: #0f1115;
+  --surface: #161b22;
+  --text: #ebedf0;
+  --muted: #9ca3af;
+  --accent: #f97316;
+  --accent-2: #fb923c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  width: 320px;
+  background: linear-gradient(180deg, #0b0d10, var(--bg));
+  color: var(--text);
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+}
+
+main {
+  padding: 16px;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.actions {
+  margin-top: 14px;
+  display: grid;
+  gap: 8px;
+}
+
+button {
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+  background: linear-gradient(120deg, var(--accent), var(--accent-2));
+  color: #111;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+button.secondary {
+  background: #232933;
+  color: #e6e7eb;
+}
+
+#status {
+  margin-top: 10px;
+  min-height: 18px;
+}
