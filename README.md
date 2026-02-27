@@ -2,6 +2,15 @@
 
 A Chrome Extension (Manifest V3) to track your Swiggy order spending and visualize it in a modern analytics dashboard.
 
+## Screenshots
+<img width="317" height="420" alt="Screenshot 2026-02-27 at 11 44 49 AM" src="https://github.com/user-attachments/assets/efe0e30d-ef37-43d2-bf28-7fe487f53924" />
+
+<img width="1440" height="812" alt="Screenshot 2026-02-27 at 11 37 55 AM" src="https://github.com/user-attachments/assets/8dc0b4e7-6ccd-488f-b295-f96c182b91e7" />
+
+<img width="1440" height="812" alt="Screenshot 2026-02-27 at 11 37 37 AM" src="https://github.com/user-attachments/assets/d63c8b0f-fde1-4fc3-8a66-3482007cb859" />
+
+
+
 ## Highlights
 
 - Sync orders from your currently open Swiggy tab
