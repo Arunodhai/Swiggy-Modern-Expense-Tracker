@@ -116,7 +116,6 @@ npm run dev:fresh
 ## Current State
 
 - The dashboard is fully implemented as a Next.js application
-- The old standalone HTML dashboard is no longer part of the app
 - Insights are fully local and deterministic
 
 ## Note
