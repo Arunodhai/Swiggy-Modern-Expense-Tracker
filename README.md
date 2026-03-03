@@ -4,6 +4,11 @@ A standalone dashboard app that visualizes your Swiggy order history from a CSV 
 
 The project now also includes a Next.js migration shell so you can move off the single-file dashboard incrementally without changing the current dashboard behavior.
 
+## Screenshots
+<img width="2880" height="2198" alt="screencapture-localhost-3000-2026-03-03-10_20_15" src="https://github.com/user-attachments/assets/82e90777-c90d-4607-898c-89a157b151a6" />
+
+<img width="2880" height="2198" alt="screencapture-localhost-3000-2026-03-03-10_20_34" src="https://github.com/user-attachments/assets/ceaa2047-c613-43e5-b80e-70b1d1b9664e" />
+
 ## What It Does
 
 - Upload your Swiggy orders CSV directly in the dashboard
