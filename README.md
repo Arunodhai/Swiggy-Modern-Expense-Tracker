@@ -1,25 +1,17 @@
-# Swiggy Expense Tracker (Chrome Extension)
+# Swiggy Expense Dashboard (CSV Upload)
 
-A Chrome Extension (Manifest V3) to track your Swiggy order spending and visualize it in a modern analytics dashboard.
+A standalone dashboard app that visualizes your Swiggy order history from a CSV file.
 
-## Screenshots
-<img width="317" height="420" alt="Screenshot 2026-02-27 at 11 44 49 AM" src="https://github.com/user-attachments/assets/efe0e30d-ef37-43d2-bf28-7fe487f53924" />
+The project now also includes a Next.js migration shell so you can move off the single-file dashboard incrementally without changing the current dashboard behavior.
 
-<img width="1440" height="810" alt="Screenshot 2026-02-27 at 6 16 50 PM" src="https://github.com/user-attachments/assets/d23e8e27-547b-427e-ad6c-d88b4488d448" />
+## What It Does
 
-<img width="1440" height="810" alt="Screenshot 2026-02-27 at 6 16 59 PM" src="https://github.com/user-attachments/assets/7d4a0052-1619-41ee-81de-5c0858a83ef2" />
-
-
-
-## Highlights
-
-- Sync orders from your currently open Swiggy tab
-- Deduplicated local order store (`chrome.storage.local`)
-- Single-page analytics dashboard with multiple visualizations
-- Global year filter (`All Time` + per-year)
-- Theme toggle (Light / Dark)
-- Animated chart entry transitions
-- Profile phone capture from Swiggy account page
+- Upload your Swiggy orders CSV directly in the dashboard
+- Store imported orders locally in browser `localStorage`
+- Render KPIs and interactive charts from CSV data
+- Filter analytics by year (`All Time` + per-year)
+- Toggle light/dark theme
+- Reorder dashboard cards with drag and drop
 
 ## Dashboard Includes
 
@@ -32,84 +24,80 @@ A Chrome Extension (Manifest V3) to track your Swiggy order spending and visuali
   - Most ordered item
 - Charts:
   - Monthly Spend (bar)
-  - Spend by Restaurant (donut + hover value)
-  - Busiest Ordering Days/Times (heatmap + hover)
-  - Food Item Count (horizontal bars + hover)
-  - Order Trend (line + hover)
-  - Order Activity & Streak (calendar grid + streak stats)
+  - Spend by Restaurant (donut)
+  - Busiest Ordering Days/Times (radial heatmap)
+  - Food Item Count (horizontal bars)
+  - Order Trend (line)
+  - Order Activity & Streak (calendar grid)
 
-## Screenshots
+## Expected CSV Columns
 
-Add your screenshots here:
+The importer supports your current format (example: `swiggy_orders_final.csv`) and reads these fields:
 
-```md
-![Popup](screenshots/popup.png)
-![Dashboard Light](screenshots/dashboard-light.png)
-![Dashboard Dark](screenshots/dashboard-dark.png)
+- `Order No`
+- `Restaurant`
+- `Date`
+- `Time`
+- `Status`
+- `Items`
+- `Order Total`
+
+Additional columns are ignored.
+
+## Run Locally
+
+### Next.js app
+
+1. Install dependencies:
+
+```bash
+npm install
 ```
 
-## Installation (Developer Mode)
+2. Start the Next.js dev server:
 
-1. Open `chrome://extensions`
-2. Enable **Developer mode**
-3. Click **Load unpacked**
-4. Select this project folder
+```bash
+npm run dev
+```
 
-## Usage
+3. Open `http://localhost:3000`
 
-1. Open Swiggy order history: `https://www.swiggy.com/my-account/orders`
-2. Scroll down to load older orders (lazy-loaded by Swiggy)
-3. Open extension popup
-4. Click **Sync current Swiggy page**
-5. Click **Open full dashboard**
-6. Use year filter / theme toggle as needed
-7. Repeat sync after scrolling further for older history
+If the dev server starts throwing stale chunk errors such as `Cannot find module './548.js'`, run a clean dev start instead:
 
-## Data Storage & Privacy
+```bash
+npm run dev:clean
+```
 
-- Data is stored locally in your browser using `chrome.storage.local`
-- No backend/server is used
-- No cloud sync by default
-- Keys:
-  - `swiggy_orders_v1`
-  - `swiggy_profile_v1`
-  - `swiggy_dashboard_theme_v1`
+If port `3000` is already occupied by an older Next process, use:
 
-## Permissions Used
+```bash
+npm run dev:fresh
+```
 
-- `storage` - save orders/profile/theme
-- `tabs` - access active tab for sync
-- `scripting` - inject content script fallback when needed
-- Host permission: `https://www.swiggy.com/*`
+That command clears `.next`, stops the process currently listening on port `3000`, and starts one fresh dev server on `3000`.
 
-## Tech Stack
+The Next.js homepage renders the full dashboard natively, including the KPI cards, canvas charts, activity calendar, upload flow, theme toggle, year filter, card reordering, and deterministic rule-based insights.
 
-- Manifest V3
-- Service worker background script
-- Content script DOM extraction
-- Canvas-based custom chart rendering
-- Vanilla JS + CSS
+## Data Storage
+
+- Imported data is saved in browser `localStorage`
+- Storage key used: `swiggy_orders_v1`
+- Theme and card order are also stored locally
 
 ## Project Structure
 
-- `manifest.json` - extension config
-- `src/background.js` - message handlers + storage + sync orchestration
-- `src/content.js` - Swiggy page scraping (orders + profile)
-- `src/popup.html|css|js` - popup UI and actions
-- `src/dashboard.html|css|js` - dashboard UI, theming, charts, interactions
-- `src/icons/` - app icons/logo
+- `components/migration-dashboard.tsx` - React implementation of the full dashboard UI, charts, calendar, and interactions
+- `lib/dashboard-data.ts` - shared browser-side parsing, storage, KPI computation, and persisted dashboard state helpers
+- `app/page.tsx` - Next.js homepage for the full dashboard
+- `app/globals.css` - Next.js dashboard styling
+- `package.json` - Next.js app scripts and dependencies
 
-## Troubleshooting
+## Current State
 
-- **Could not establish connection. Receiving end does not exist**
-  - Open a Swiggy tab and retry sync
-  - Extension has fallback script injection; retry once after page load
-- **No/low spend values**
-  - Ensure order cards on page show `Total Paid`
-  - Scroll more, then sync again
-- **Data looks outdated**
-  - Click **Refresh from current tab** in dashboard after syncing
+- The dashboard is fully implemented in Next.js.
+- The app uses browser `localStorage` for imported orders, theme preference, profile data, and card ordering.
+- The old standalone HTML implementation and compatibility route have been removed.
 
-## Disclaimer
+## Notes
 
-This project is an independent utility and is not affiliated with or endorsed by Swiggy.
+- This project is an independent utility and is not affiliated with or endorsed by Swiggy.
